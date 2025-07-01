@@ -2,6 +2,7 @@ import { useState } from "react";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
 import ListGroup from "../components/ListGroup";
+import { Link } from "react-router-dom";
 
 function Home() {
   let items = ["Chicken", "Pork", "Beef", "Mutton", "Fish"];
@@ -21,6 +22,7 @@ function Home() {
       <Button color="dark" onClick={() => setAlertVisibility(true)}>
         My Button
       </Button>
+      <Link to= '/help'>Help Page</Link>
     </div>
   );
 }
