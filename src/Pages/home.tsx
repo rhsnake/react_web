@@ -5,12 +5,14 @@ import ListGroup from "../components/ListGroup";
 import { Link } from "react-router-dom";
 
 function Home() {
-  let items = ["Chicken", "Pork", "Beef", "Mutton", "Fish"];
+  let items = ["Chicken", "Pork", "Beef", "Mutton", "Fish", "Crocodile"];
   const [selectedItem, setSelectedItem] = useState("No item selected");
+  const [displayedItem, setDisplayedItem] = useState("No item selected");
 
   const handleSelectItem = (item: string) => {
     setSelectedItem(item);
   };
+
 
   const [alertVisible, setAlertVisibility] = useState(false);
 
@@ -24,10 +26,10 @@ function Home() {
         />
         {alertVisible && (
           <Alert onClose={() => setAlertVisibility(false)}>
-            {selectedItem}
+            {displayedItem}
           </Alert>
         )}
-        <Button color="dark" onClick={() => setAlertVisibility(true)}>
+        <Button color="dark" onClick={() => {setAlertVisibility(true); setDisplayedItem(selectedItem)}}>
           My Button
         </Button>
         <Link to="/help">Help Page</Link>
