@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface Props {
-  items: string[];
+  items: any[];
   heading: string;
   //to get variable from this component
   onSelectItem: (item:string) => void;
@@ -27,7 +27,7 @@ function ListGroup({items,heading, onSelectItem}: Props) {
       {getMessage()}
       <ul className="list-group">
         {items.map((item,index) => (
-          <li className= {selectedIndex === index ? 'list-group-item active' : 'list-group-item'} key={item} onClick={() => {setSelectedIndex(index); onSelectItem(item)}}>{item}</li>
+          <li className= {selectedIndex === index ? 'list-group-item active' : 'list-group-item'} key={item.name} onClick={() => {setSelectedIndex(index); onSelectItem(item.desc)}}>{item.name}</li>
         ))}
       </ul>
     </>
