@@ -11,9 +11,9 @@ const NavBar = () => {
           <Link className="nav-link" aria-current="page" to='/'>
             Home
           </Link>
-          <a className="nav-link" href="#">
+          <Link className="nav-link" to='/riot'>
             Features
-          </a>
+          </Link>
           <a className="nav-link" href="#">
             Pricing
           </a>
