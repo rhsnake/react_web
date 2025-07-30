@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alert from "../components/Alert";
 import Button from "../components/Button";
 import ListGroup from "../components/ListGroup";
 
 class FoodItem{
   constructor(name:string , desc : string, price : string){
-    this.name = name
-    this.desc = desc
-    this.price = price
+    this.id = crypto.randomUUID();
+    this.name = name;
+    this.desc = desc;
+    this.price = price;
   }
+  id : string;
   name : string;
   desc : string;
   price : string;
-
 }
 
 function Home() {
@@ -23,15 +24,36 @@ function Home() {
   const fish = new FoodItem("fish","Fresh from the Singapore River","5");
   const crocodile = new FoodItem("crocodile","From the rivers of austrilia","30");
   let items = [chicken, pork, beef, mutton, fish, crocodile];
-  const [selectedItem, setSelectedItem] = useState("No item selected");
+  const [selectedItemDesc, setSelectedItemDesc] = useState("No item selected");
   const [displayedItem, setDisplayedItem] = useState("No item selected");
+  const [alertVisible, setAlertVisibility] = useState(false);
+  const [cartItem, setCartItem] = useState<FoodItem[]>(()=> {
+    const localvalue = localStorage.getItem("Cart");
+    if (localvalue === null) return [];
+    return JSON.parse(localvalue)
+  });
 
   const handleSelectItem = (item: string) => {
-    setSelectedItem(item);
+    setSelectedItemDesc(item);
   };
 
+  useEffect(()=> {
+    localStorage.setItem("Cart",JSON.stringify(cartItem));
+  }
+  ,[cartItem])
 
-  const [alertVisible, setAlertVisibility] = useState(false);
+  function addCartItem (food : string){
+    if (food === "No item selected") return
+
+    let input = items.find((item)=>{
+      return item.desc === food
+    })
+    
+    if (input) {
+      setCartItem([...cartItem,input])
+    }
+    
+  }
 
   return (
     <>
@@ -46,10 +68,15 @@ function Home() {
             {displayedItem}
           </Alert>
         )}
-        <Button color="dark" onClick={() => {setAlertVisibility(true); setDisplayedItem(selectedItem)}}>
-          My Button
+        <Button color="dark" onClick={() => {setAlertVisibility(true); setDisplayedItem(selectedItemDesc)}}>
+          Product Description
         </Button>
       </div>
+      <Button color="danger" onClick={() => addCartItem(selectedItemDesc)}>
+        Add to Cart
+      </Button>
+
+      <ListGroup items={cartItem} heading="Cart" onSelectItem={handleSelectItem}></ListGroup>
     </>
   );
 }
