@@ -142,3 +142,16 @@ body {
 .list li:has(input:checked) label:hover::before {
   background: hsl(200, 100%, 30%);
 }
+
+.form-check{
+  padding: 0.5em 0.5em;
+  border-radius: 0.25em;
+}
+
+.nav-link{
+  padding: 0.2em;
+}
+
+.navbar-brand{
+  padding-left: 0.2em;
+}

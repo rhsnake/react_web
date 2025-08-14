@@ -4,7 +4,7 @@ const Riot = () => {
 
   async function fetchData(){
     try{
-      const res = await fetch('https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/rhsnake/sg2?api_key=RGAPI-76ce8a08-e1b0-49b7-94b1-d57fdfdd9529')
+      const res = await fetch('https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/rhsnake/sg2?api_key=RGAPI-b338d2d2-a3d5-4209-8789-144ed66bd695')
       const data = await res.json();
       return data
     }catch(err){
@@ -12,11 +12,15 @@ const Riot = () => {
     }
   }//end of fetchData
 
+  const dataString = JSON.stringify(fetchData());
   useEffect(()=>{
-    console.log(fetchData());
+    console.log(fetchData())
   },[]);
+  
   return (
-    <div>RIOT GAMESSS</div>
+    <div id="a">
+      {dataString}
+    </div>
   )
 }
 

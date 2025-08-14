@@ -1,7 +1,7 @@
 
 
 interface Props{
-    children : string;
+    children : any;
     color? : 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
     onClick: () => void;
 }
